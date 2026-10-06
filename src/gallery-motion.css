@@ -1,0 +1,79 @@
+/* The studio's presentation motion is independent of the six embedded websites. */
+:root{--studio-ease:cubic-bezier(.16,1,.3,1)}
+.concept-card{min-height:100svh;padding-block:clamp(56px,8svh,90px);--preview-entry-x:90px;--preview-entry-rotation:18deg}
+.preview-well{height:clamp(350px,calc(100svh - 240px),545px)}
+.concept-card.is-reversed{grid-template-columns:1.6fr .9fr;--preview-entry-x:-90px;--preview-entry-rotation:-18deg}
+.is-reversed .card-story{grid-column:2;grid-row:1}
+.is-reversed .demo-display{grid-column:1;grid-row:1}
+.is-reversed .ghost-number{left:auto;right:6%}
+.motion-word{display:inline-block;white-space:nowrap;vertical-align:bottom;overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em}
+.motion-char{display:inline-block}
+
+.motion-ready .studio-nav{animation:studio-nav-in .8s var(--studio-ease) both}
+.motion-ready .intro-content>:not(h1),
+.motion-ready .card-story>:not(.card-title),
+.motion-ready .card-title>p,
+.motion-ready .collection-bar>div{opacity:0;translate:0 28px;filter:blur(6px);transition:opacity .7s,translate 1s var(--studio-ease),filter .7s;transition-delay:calc(var(--motion-step,0)*80ms + 60ms)}
+.motion-ready .intro-content.is-revealed>:not(h1),
+.motion-ready .is-revealed .card-story>:not(.card-title),
+.motion-ready .is-revealed .card-title>p,
+.motion-ready .collection-bar.is-revealed>div{opacity:1;translate:0 0;filter:none}
+.motion-ready .motion-char{opacity:0;transform:translateY(110%) rotate(4deg);transition:transform .95s var(--studio-ease),opacity .6s;transition-delay:calc(var(--motion-char)*24ms + 80ms)}
+.motion-ready .is-revealed .motion-char{opacity:1;transform:none}
+.motion-ready .demo-display{opacity:0;transform:perspective(1800px) translate3d(var(--preview-entry-x),48px,0) rotateY(var(--preview-entry-rotation)) rotateX(8deg) scale(.88);transition:transform 1.3s var(--studio-ease) .12s,opacity .9s .12s,border-color .25s,box-shadow .25s}
+.motion-ready .is-revealed .demo-display{opacity:1;transform:none}
+.motion-ready .swatch-set>span{transform:scale(0);transition:transform .6s var(--studio-ease) .3s}
+.motion-ready .swatch-set>span:nth-child(2){transition-delay:.38s}
+.motion-ready .swatch-set>span:nth-child(3){transition-delay:.46s}
+.motion-ready .is-revealed .swatch-set>span{transform:scale(1)}
+.demo-display:hover{border-color:color-mix(in srgb,var(--direction) 65%,#30425e);box-shadow:0 28px 80px #0005,0 0 35px color-mix(in srgb,var(--direction) 10%,transparent)}
+.section-dots a{transition:background .3s,transform .3s,box-shadow .3s}
+.section-dots a.active{transform:scale(1.3);box-shadow:0 0 18px #819eff70}
+.motion-ready .scroll-cue>span::after{animation:studio-scroll-cue 1.8s ease infinite}
+.motion-ready .fullscreen-dialog[open]{animation:studio-fullscreen-in .5s var(--studio-ease) both}
+.motion-ready .fullscreen-dialog[open] .fullscreen-topbar>div{animation:studio-toolbar-in .6s var(--studio-ease) .12s both}
+.motion-ready .brief-dialog[open]{animation:studio-brief-in .4s var(--studio-ease) both}
+
+/* Interaction always takes precedence over presentation transforms. */
+.motion-ready .concept-card.is-interactive .demo-display,
+.motion-ready .concept-card:focus-within .demo-display{opacity:1;transform:none;transition:none}
+.motion-ready .concept-card:focus-within .card-story>*,
+.motion-ready .concept-card:focus-within .card-title>p,
+.motion-ready .intro-content:focus-within>:not(h1){opacity:1;translate:0 0;filter:none;transition:none}
+.motion-ready .concept-card:focus-within .motion-char,
+.motion-ready .intro-content:focus-within .motion-char{opacity:1;transform:none;transition:none}
+
+@keyframes studio-nav-in{from{opacity:0;translate:0 -12px}to{opacity:1;translate:0 0}}
+@keyframes studio-scroll-cue{0%{opacity:0;translate:0 -3px}25%,65%{opacity:1}100%{opacity:0;translate:0 10px}}
+@keyframes studio-fullscreen-in{from{opacity:0;transform:translateY(30px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes studio-toolbar-in{from{opacity:0;translate:0 -10px}to{opacity:1;translate:0 0}}
+@keyframes studio-brief-in{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+
+@supports(animation-timeline:view()){
+  @media(min-width:1081px) and (min-height:620px) and (prefers-reduced-motion:no-preference){
+    .motion-ready .concept-card{view-timeline:--direction;animation:studio-section-exit linear both;animation-timeline:view();animation-range:exit}
+    .motion-ready .ghost-number{animation:studio-number-drift linear both;animation-timeline:--direction;animation-range:cover}
+    .motion-ready .studio-intro{view-timeline:--intro}
+    .motion-ready .studio-hero-image{animation:studio-hero-drift linear both;animation-timeline:--intro;animation-range:exit}
+    .motion-ready .intro-content{animation:studio-section-exit linear both;animation-timeline:--intro;animation-range:exit 0% exit 75%}
+    .motion-ready .concept-card.is-interactive,.motion-ready .concept-card:focus-within,.motion-ready .intro-content:focus-within{animation:none}
+  }
+  @keyframes studio-section-exit{to{opacity:0;scale:.93;translate:0 -7vh}}
+  @keyframes studio-number-drift{from{translate:0 14vh}to{translate:0 -14vh}}
+  @keyframes studio-hero-drift{to{translate:0 24%;opacity:.3}}
+}
+
+@media(max-width:1200px) and (min-width:851px){.concept-card.is-reversed{grid-template-columns:1.4fr .9fr}}
+@media(max-width:850px){
+  .concept-card,.concept-card.is-reversed{grid-template-columns:minmax(0,1fr);padding-block:60px}
+  .is-reversed .card-story{grid-column:1;grid-row:1}
+  .is-reversed .demo-display{grid-column:1;grid-row:2}
+  .is-reversed .ghost-number{left:0;right:auto}
+  .preview-well{height:510px}
+  .motion-ready .demo-display{transform:translateY(35px) scale(.97)}
+}
+@media(max-width:600px){.concept-card{padding-block:50px 60px}.preview-well{height:350px}}
+@media(prefers-reduced-motion:reduce){
+  .motion-ready .intro-content>*,.motion-ready .card-story>*,.motion-ready .card-title>p,.motion-ready .collection-bar>div,.motion-ready .motion-char,.motion-ready .demo-display,.motion-ready .swatch-set>span{opacity:1;translate:none;filter:none;transform:none}
+  .motion-word{overflow:visible}
+}

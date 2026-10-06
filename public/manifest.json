@@ -1,0 +1,15 @@
+{
+  "client": "Sanders Signature Clean, LLC",
+  "title": "A cleaner space. Six ways to say it.",
+  "intro": "Six distinct website directions for commercial cleaning and pressure washing in Huntsville, Alabama.",
+  "lang": "en",
+  "accent": "#3e63f5",
+  "concepts": [
+    { "name": "Signature", "description": "Cinematic cleaning photography, navy and champagne, editorial serif type, and a featured service composition.", "tags": ["Editorial", "Cinematic", "Premium"], "file": "signature.html" },
+    { "name": "Fresh Standard", "description": "Electric blue, bold typography, a facility photo mosaic, and bento service navigation.", "tags": ["Modern", "Structured", "Direct"], "file": "fresh-standard.html" },
+    { "name": "Southern Care", "description": "Warm terracotta and cream, expressive serif type, a photographic triptych, and alternating service stories.", "tags": ["Warm", "Editorial", "Local"], "file": "southern-care.html" },
+    { "name": "Precision", "description": "Industrial type, safety yellow, pressure-washing photography, a live service planner, and capability accordions.", "tags": ["Bold", "Industrial", "B2B"], "file": "precision.html" },
+    { "name": "Everyday Ease", "description": "Mint and coral, rounded modules, a live routine planner, and an accessible service picker.", "tags": ["Friendly", "Modular", "Interactive"], "file": "everyday-ease.html" },
+    { "name": "Quiet Luxury", "description": "Vertical navigation, olive and cream, restrained typography, architectural photography, and generous service rows.", "tags": ["Minimal", "Refined", "Calm"], "file": "quiet-luxury.html" }
+  ]
+}
